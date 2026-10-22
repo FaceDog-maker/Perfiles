@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ficha de Emergencia - Mascota</title>
+    <!-- v1.0.1 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
@@ -14,8 +15,8 @@
     <!-- Contenedor Principal Estilo Tarjeta Móvil -->
     <div class="w-full sm:max-w-md bg-slate-100 min-h-screen sm:min-h-0 sm:rounded-3xl shadow-2xl overflow-hidden pb-10">
         
-        <!-- Header / Banner Verde con Foto Central y Margen Corregido -->
-        <div class="bg-emerald-600 text-white pt-6 pb-8 px-6 rounded-b-[40px] shadow-lg relative text-center">
+        <!-- Header / Banner Verde con Foto Central -->
+        <div class="bg-emerald-600 text-white pt-8 pb-8 px-6 rounded-b-[40px] shadow-lg relative text-center">
             <div class="flex items-center justify-between mb-6">
                 <span class="bg-emerald-700/80 text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-wider border border-emerald-400/30">
                     IDENTIFICACIÓN OFICIAL
@@ -129,7 +130,7 @@
                 foto: "https://cdn.phototourl.com/member/2026-10-22-a39742d8-d74a-419f-9dae-a89f4ac2c9e4.jpg",
                 
                 texto_casa: "Psj Canaán 2 Oriente 0222",
-                maps_casa: "https://www.google.com/maps/place/Pje.+Cana%C3%A1n+2+Ote.+222,+Puente+Alto,+Regi%C3%B3n+Metropolitana/@-33.6189441,-70.6236883,725m/data=!3m2!1e3!4b1!4m6!3m5!1s0x9662d787532872bf:0x5710d1a8bfa6c082!8m2!3d-33.6189441!4d-70.6211134!16s%2Fg%2F11jtv9_z26?entry=ttu&g_ep=EgoyMDI2MTAxOS4wIKXMDSoASAFQAw%3D%3D",
+                maps_casa: "https://www.google.com/maps/place/Pje.+Cana%C3%A1n+2+Ote.+222,+Puente+Alto,+Regi%C3%B3n+Metropolitana/@-33.6189441,-70.6236883,725m",
                 
                 texto_vet: "Veterinaria de Turno / Puente Alto",
                 maps_vet: "https://maps.google.com/?q=Veterinaria+Puente+Alto",
@@ -143,28 +144,6 @@
                 
                 alergias: "Alérgico a correr",
                 comportamiento: "Necesita estar en brazo ya que padece de flojeritis"
-            },
-            "0002": {
-                nombre: "Nombre Mascota 2",
-                raza: "Raza",
-                comuna: "Puente Alto",
-                foto: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=400",
-                
-                texto_casa: "Dirección casa 2",
-                maps_casa: "https://maps.google.com/?q=Direccion+Casa+2",
-                
-                texto_vet: "Veterinaria 2",
-                maps_vet: "https://maps.google.com/?q=Veterinaria+2",
-                
-                dueno: "Dueño 2",
-                telefono: "912345678",
-                whatsapp: "912345678",
-                
-                dueno2: "Contacto Emergencia 2",
-                emergencia: "987654321",
-                
-                alergias: "Ninguna",
-                comportamiento: "Tranquilo"
             }
         };
 
@@ -181,29 +160,24 @@
             const petId = params.get('id') || '0001';
             const p = dbMascotas[petId] || dbMascotas["0001"];
 
-            // ID limpio en esquina superior derecha
             document.getElementById('pet-id-badge').innerText = 'ID: ' + petId;
             document.getElementById('pet-name').innerText = p.nombre;
             document.getElementById('pet-breed').innerText = p.raza;
             document.getElementById('pet-location-text').innerText = p.comuna;
             document.getElementById('pet-photo').src = p.foto;
             
-            // Mapas Casa y Vet
             document.getElementById('pet-address-text').innerText = p.texto_casa || 'Ver en Google Maps';
             document.getElementById('btn-maps-casa').href = p.maps_casa || '#';
 
             document.getElementById('pet-vet-text').innerText = p.texto_vet || 'Ver Vet en Google Maps';
             document.getElementById('btn-maps-vet').href = p.maps_vet || '#';
 
-            // Alertas y Comportamiento
             document.getElementById('pet-health').innerText = p.alergias;
             document.getElementById('pet-behavior').innerText = p.comportamiento;
 
-            // Contactos
             document.getElementById('pet-owner').innerText = p.dueno;
             document.getElementById('pet-owner2').innerText = p.dueno2 || 'No registrado';
 
-            // Enlaces de llamada y WhatsApp formateados
             const tel1 = formatearTelefono(p.telefono);
             const tel2 = formatearTelefono(p.emergencia);
 
