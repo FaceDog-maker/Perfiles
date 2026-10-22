@@ -2,191 +2,368 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ficha de Emergencia - Mascota</title>
-    <!-- v1.0.1 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ficha Digital de Mascota - NFC Smart Tag</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-    </style>
-</head>
-<body class="bg-slate-900 min-h-screen flex items-center justify-center p-0 sm:p-4 text-slate-800">
-
-    <!-- Contenedor Principal Estilo Tarjeta Móvil -->
-    <div class="w-full sm:max-w-md bg-slate-100 min-h-screen sm:min-h-0 sm:rounded-3xl shadow-2xl overflow-hidden pb-10">
-        
-        <!-- Header / Banner Verde con Foto Central -->
-        <div class="bg-emerald-600 text-white pt-8 pb-8 px-6 rounded-b-[40px] shadow-lg relative text-center">
-            <div class="flex items-center justify-between mb-6">
-                <span class="bg-emerald-700/80 text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-wider border border-emerald-400/30">
-                    IDENTIFICACIÓN OFICIAL
-                </span>
-                <span id="pet-id-badge" class="text-xs bg-black/20 px-3 py-1 rounded-full font-mono font-bold">ID: ----</span>
-            </div>
-            
-            <!-- Foto y Datos Centralizados -->
-            <div class="flex flex-col items-center">
-                <img id="pet-photo" src="" alt="Foto Mascota" class="w-32 h-32 rounded-full object-cover border-4 border-white/30 shadow-2xl bg-slate-200 mb-3">
-                <h1 id="pet-name" class="text-3xl font-black tracking-tight leading-tight">---</h1>
-                <p id="pet-breed" class="text-emerald-100 text-sm font-medium mt-0.5">---</p>
-                <p id="pet-location" class="text-xs text-emerald-200 mt-1 flex items-center justify-center gap-1">
-                    📍 <span id="pet-location-text">---</span>
-                </p>
-            </div>
-        </div>
-
-        <!-- Botones Principales de Contacto Inmediato -->
-        <div class="px-4 -mt-5 relative z-10 space-y-2">
-            <a id="btn-call" href="#" class="flex items-center justify-center w-full bg-emerald-500 hover:bg-emerald-600 active:scale-[0.98] text-white font-black py-3.5 px-4 rounded-2xl shadow-lg transition-all space-x-2 text-base">
-                <svg class="w-5 h-5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                <span>LLAMAR A DUEÑO/A</span>
-            </a>
-            
-            <a id="btn-wa" href="#" target="_blank" class="flex items-center justify-center w-full bg-slate-900 hover:bg-black active:scale-[0.98] text-white font-bold py-3 px-4 rounded-2xl shadow-md transition-all space-x-2 text-sm">
-                <svg class="w-5 h-5 text-emerald-400" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-1.111 4.053 4.223-1.106z"/></svg>
-                <span>Enviar WhatsApp</span>
-            </a>
-        </div>
-
-        <!-- Ubicaciones (Casa y Veterinaria) -->
-        <div class="px-4 mt-3 space-y-2">
-            <!-- Domicilio -->
-            <a id="btn-maps-casa" href="#" target="_blank" class="flex items-center justify-between bg-white border border-slate-200 p-3.5 rounded-2xl shadow-sm hover:shadow-md transition-all group">
-                <div class="flex items-center space-x-3">
-                    <div class="w-9 h-9 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center flex-shrink-0">
-                        🏠
-                    </div>
-                    <div>
-                        <p class="text-[10px] text-slate-400 font-extrabold uppercase tracking-wider">Casa / Domicilio</p>
-                        <p id="pet-address-text" class="text-xs font-bold text-slate-800">---</p>
-                    </div>
-                </div>
-                <span class="text-xs text-blue-600 font-bold group-hover:translate-x-0.5 transition-transform flex-shrink-0 ml-2">Ir al Mapa &rarr;</span>
-            </a>
-
-            <!-- Veterinaria -->
-            <a id="btn-maps-vet" href="#" target="_blank" class="flex items-center justify-between bg-white border border-slate-200 p-3.5 rounded-2xl shadow-sm hover:shadow-md transition-all group">
-                <div class="flex items-center space-x-3">
-                    <div class="w-9 h-9 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0">
-                        🏥
-                    </div>
-                    <div>
-                        <p class="text-[10px] text-slate-400 font-extrabold uppercase tracking-wider">Veterinaria de Cabecera</p>
-                        <p id="pet-vet-text" class="text-xs font-bold text-slate-800">---</p>
-                    </div>
-                </div>
-                <span class="text-xs text-emerald-600 font-bold group-hover:translate-x-0.5 transition-transform flex-shrink-0 ml-2">Ir a Vet &rarr;</span>
-            </a>
-        </div>
-
-        <!-- Alerta Médica / Salud -->
-        <div class="px-4 mt-3">
-            <div class="bg-red-50 border border-red-200 rounded-2xl p-4 shadow-sm">
-                <div class="flex items-center space-x-2 text-red-700 mb-1 font-black text-xs uppercase tracking-wider">
-                    <span>⚠️</span>
-                    <span>Información Médica / Alertas</span>
-                </div>
-                <div class="space-y-1 text-xs text-slate-700 mt-2">
-                    <p><strong class="text-slate-900 font-bold">Alergias / Salud:</strong> <span id="pet-health">---</span></p>
-                    <p><strong class="text-slate-900 font-bold">Comportamiento:</strong> <span id="pet-behavior">---</span></p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Contactos Directos -->
-        <div class="px-4 mt-3">
-            <div class="bg-white rounded-2xl p-4 shadow-sm space-y-3 text-xs border border-slate-200/80">
-                <h2 class="font-extrabold text-slate-400 text-[10px] tracking-wider uppercase">Contactos Directos</h2>
-                
-                <div class="flex justify-between items-center py-1 border-b border-slate-100">
-                    <div>
-                        <p class="text-[10px] text-slate-400">Tutor(a) Principal</p>
-                        <p id="pet-owner" class="font-bold text-slate-800 text-sm">---</p>
-                    </div>
-                    <span class="text-[10px] bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full font-bold">Principal</span>
-                </div>
-
-                <div class="flex justify-between items-center py-1">
-                    <div>
-                        <p class="text-[10px] text-slate-400">Contacto Secundario</p>
-                        <p id="pet-owner2" class="font-bold text-slate-800 text-sm">---</p>
-                    </div>
-                    <a id="btn-emergency" href="#" class="bg-slate-100 hover:bg-slate-200 active:scale-95 text-slate-700 px-3 py-1.5 rounded-xl font-bold text-xs transition-all flex items-center space-x-1">
-                        <span>📞 Llamar</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-    </div>
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Font (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <script>
-        // --- BASE DE DATOS LOCAL DE MASCOTAS ---
-        const dbMascotas = {
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            green: '#10B981',
+                            greenHover: '#059669',
+                            whatsapp: '#25D366',
+                            danger: '#EF4444',
+                            dangerBg: '#FEF2F2',
+                            warning: '#F59E0B',
+                            warningBg: '#FFFBEB',
+                            card: '#FFFFFF',
+                            bg: '#F8FAFC'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8FAFC;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .action-btn {
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .action-btn:active {
+            transform: scale(0.97);
+        }
+        /* Custom scrollbar for demo drawer */
+        .drawer-scroll::-webkit-scrollbar {
+            height: 4px;
+        }
+        .drawer-scroll::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col justify-between items-center p-3 sm:p-5 selection:bg-emerald-500 selection:text-white">
+
+    <!-- MAIN CONTAINER (Mobile App Frame Style) -->
+    <main class="w-full max-w-md bg-white rounded-3xl shadow-xl shadow-slate-200/60 overflow-hidden border border-slate-100 transition-all duration-300 my-auto mb-20">
+        
+        <!-- HEADER / AVATAR & BASIC INFO -->
+        <header class="relative pt-8 pb-6 px-6 text-center bg-gradient-to-b from-slate-50/80 to-white border-b border-slate-100">
+            <!-- NFC Active Pill Indicator -->
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200/60 text-emerald-700 text-xs font-semibold mb-5 shadow-sm">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                Plaquita NFC Verificada
+            </div>
+
+            <!-- Pet Photo Avatar -->
+            <div class="relative w-32 h-32 mx-auto mb-4">
+                <img id="pet-photo" 
+                     src="" 
+                     alt="Foto de la mascota" 
+                     class="w-full h-full object-cover rounded-full shadow-lg ring-4 ring-white border border-slate-200"
+                     onerror="this.src='https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&q=80&w=400'">
+                <div class="absolute bottom-1 right-1 bg-white p-1.5 rounded-full shadow-md border border-slate-100 text-emerald-600" title="Identificación activa">
+                    <i data-lucide="shield-check" class="w-5 h-5"></i>
+                </div>
+            </div>
+
+            <!-- Pet Name & Breed -->
+            <h1 id="pet-name" class="text-3xl font-bold text-slate-900 tracking-tight">---</h1>
+            <p id="pet-breed" class="text-sm font-medium text-slate-500 mt-0.5">---</p>
+            
+            <!-- Quick Info Tags (Age, Gender, Location) -->
+            <div class="flex items-center justify-center gap-2 mt-3 text-xs font-medium text-slate-600 flex-wrap">
+                <span id="pet-age" class="px-2.5 py-1 bg-slate-100 rounded-lg">-- años</span>
+                <span id="pet-sex" class="px-2.5 py-1 bg-slate-100 rounded-lg">--</span>
+                <span class="px-2.5 py-1 bg-slate-100 rounded-lg flex items-center gap-1">
+                    <i data-lucide="map-pin" class="w-3 h-3 text-slate-400"></i>
+                    <span id="pet-location">--</span>
+                </span>
+            </div>
+        </header>
+
+        <!-- PRIMARY DIRECT ACTION BUTTONS (EMERGENCY CONTACTS) -->
+        <section class="p-6 space-y-3 bg-white">
+            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Contacto Rápido de Emergencia</h2>
+            
+            <!-- Call Button -->
+            <a id="btn-call" href="#" class="action-btn flex items-center justify-between w-full p-4 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-semibold shadow-lg shadow-emerald-500/25">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 bg-white/20 rounded-xl">
+                        <i data-lucide="phone-call" class="w-6 h-6"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="text-base leading-tight">Llamar al Dueño</div>
+                        <div id="owner-name-sub" class="text-xs font-normal text-emerald-100">---</div>
+                    </div>
+                </div>
+                <i data-lucide="chevron-right" class="w-5 h-5 opacity-70"></i>
+            </a>
+
+            <!-- WhatsApp Button -->
+            <a id="btn-whatsapp" href="#" target="_blank" class="action-btn flex items-center justify-between w-full p-4 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-semibold shadow-md">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 bg-emerald-500/20 text-emerald-400 rounded-xl">
+                        <i data-lucide="message-square" class="w-6 h-6"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="text-base leading-tight">Escribir por WhatsApp</div>
+                        <div class="text-xs font-normal text-slate-400">Aviso rápido de hallazgo</div>
+                    </div>
+                </div>
+                <i data-lucide="chevron-right" class="w-5 h-5 opacity-70"></i>
+            </a>
+
+            <!-- Secondary Vet / Location Button -->
+            <a id="btn-maps" href="#" target="_blank" class="action-btn flex items-center justify-between w-full p-3.5 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 font-medium border border-slate-200/80 text-sm">
+                <div class="flex items-center gap-2.5">
+                    <i data-lucide="map-marked" class="w-4 h-4 text-slate-500"></i>
+                    <span>Ver Veterinaria / Domicilio habitual</span>
+                </div>
+                <i data-lucide="external-link" class="w-4 h-4 text-slate-400"></i>
+            </a>
+        </section>
+
+        <!-- EMERGENCY & MEDICAL INFORMATION CARD -->
+        <section class="px-6 pb-6 space-y-4">
+            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400">Ficha Médica y Alertas</h2>
+
+            <!-- Critical Warning Badge (Dynamic render) -->
+            <div id="medical-alert-box" class="p-4 rounded-2xl bg-red-50 border border-red-200/80 text-red-900 space-y-1">
+                <div class="flex items-center gap-2 font-bold text-sm text-red-700">
+                    <i data-lucide="alert-triangle" class="w-4 h-4 text-red-600"></i>
+                    <span>CONDICIÓN CRÍTICA / ALERGIAS</span>
+                </div>
+                <p id="medical-alert-text" class="text-xs leading-relaxed text-red-800/90 font-medium">---</p>
+            </div>
+
+            <!-- Detailed Medical Info Grid -->
+            <div class="grid grid-cols-2 gap-3 text-xs">
+                <!-- Vaccines -->
+                <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
+                    <div class="flex items-center gap-1.5 text-slate-500 font-medium">
+                        <i data-lucide="syringe" class="w-3.5 h-3.5 text-emerald-600"></i>
+                        <span>Vacunas</span>
+                    </div>
+                    <p id="info-vaccines" class="font-semibold text-slate-800 text-sm">---</p>
+                </div>
+
+                <!-- Neutered / Spayed -->
+                <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
+                    <div class="flex items-center gap-1.5 text-slate-500 font-medium">
+                        <i data-lucide="heart-pulse" class="w-3.5 h-3.5 text-rose-500"></i>
+                        <span>Esterilizado</span>
+                    </div>
+                    <p id="info-neutered" class="font-semibold text-slate-800 text-sm">---</p>
+                </div>
+            </div>
+
+            <!-- Vet Care & Secondary Contact -->
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-2 text-xs">
+                <div class="flex justify-between items-center pb-2 border-b border-slate-200/60">
+                    <span class="text-slate-500 font-medium flex items-center gap-1.5">
+                        <i data-lucide="cross" class="w-3.5 h-3.5 text-blue-500"></i>
+                        Veterinario de Cabecera:
+                    </span>
+                    <span id="info-vet-name" class="font-semibold text-slate-800">---</span>
+                </div>
+                <div class="flex justify-between items-center pt-1">
+                    <span class="text-slate-500 font-medium flex items-center gap-1.5">
+                        <i data-lucide="user-plus" class="w-3.5 h-3.5 text-purple-500"></i>
+                        Contacto Secundario:
+                    </span>
+                    <span id="info-sec-contact" class="font-semibold text-slate-800">---</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- BEHAVIOR & NOTES -->
+        <section class="px-6 pb-6">
+            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Carácter y Recomendaciones</h2>
+            <div class="p-4 rounded-2xl bg-amber-50/60 border border-amber-200/60 text-xs text-amber-900 leading-relaxed font-medium">
+                <div class="flex items-center gap-1.5 font-bold text-amber-800 mb-1">
+                    <i data-lucide="info" class="w-4 h-4 text-amber-600"></i>
+                    <span>¿Cómo tratar a esta mascota?</span>
+                </div>
+                <p id="info-behavior">---</p>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="px-6 py-4 bg-slate-50 border-t border-slate-100 text-center text-[11px] text-slate-400 font-medium space-y-1">
+            <p class="flex items-center justify-center gap-1">
+                <i data-lucide="lock" class="w-3 h-3 text-slate-400"></i>
+                Datos protegidos y administrados por el dueño.
+            </p>
+            <p>Plaquita Inteligente NFC • Tecnología NTAG215</p>
+        </footer>
+    </main>
+
+    <!-- LIVE DEMO SWITCHER DRAWER (FOR TESTING & DEMONSTRATION) -->
+    <aside class="fixed bottom-3 left-1/2 -translate-x-1/2 w-[92%] max-w-md bg-slate-900/95 backdrop-blur-md text-white p-3 rounded-2xl shadow-2xl border border-slate-800 z-50">
+        <div class="flex items-center justify-between mb-2 px-1">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1">
+                <i data-lucide="zap" class="w-3.5 h-3.5"></i>
+                Simulador de Lectura NFC (Demo)
+            </span>
+            <span class="text-[10px] text-slate-400">Prueba cambiando la ID</span>
+        </div>
+        
+        <!-- ID Selector Buttons -->
+        <div class="flex items-center gap-2 drawer-scroll overflow-x-auto pb-1 text-xs">
+            <button onclick="switchPet('0001')" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-emerald-600 hover:text-white border border-slate-700 whitespace-nowrap font-medium transition-colors">
+                🆔 0001 (Thor - Alérgico)
+            </button>
+            <button onclick="switchPet('0002')" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-emerald-600 hover:text-white border border-slate-700 whitespace-nowrap font-medium transition-colors">
+                🆔 0002 (Luna - Sana)
+            </button>
+            <button onclick="switchPet('0003')" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-emerald-600 hover:text-white border border-slate-700 whitespace-nowrap font-medium transition-colors">
+                🆔 0003 (Max - Adulto mayor)
+            </button>
+        </div>
+    </aside>
+
+    <!-- JAVASCRIPT: DYNAMIC DATA ENGINE -->
+    <script>
+        // MOCK DATABASE (In production, this can be fetched from a single JSON file or Google Sheets)
+        const PET_DATABASE = {
             "0001": {
-                nombre: "Zeus Papotico",
-                raza: "Quiltro",
-                comuna: "Puente Alto",
-                foto: "https://cdn.phototourl.com/member/2026-10-22-a39742d8-d74a-419f-9dae-a89f4ac2c9e4.jpg",
-                
-                texto_casa: "Psj Canaán 2 Oriente 0222",
-                maps_casa: "https://www.google.com/maps/place/Pje.+Cana%C3%A1n+2+Ote.+222,+Puente+Alto,+Regi%C3%B3n+Metropolitana/@-33.6189441,-70.6236883,725m",
-                
-                texto_vet: "Veterinaria de Turno / Puente Alto",
-                maps_vet: "https://maps.google.com/?q=Veterinaria+Puente+Alto",
-                
-                dueno: "Saul Sepulveda",
-                telefono: "+56983683697",
-                whatsapp: "+56983683697",
-                
-                dueno2: "Familiar / Emergencia",
-                emergencia: "+56961577372",
-                
-                alergias: "Alérgico a correr",
-                comportamiento: "Necesita estar en brazo ya que padece de flojeritis"
+                name: "Thor",
+                breed: "Golden Retriever",
+                age: "3 años",
+                sex: "Macho",
+                location: "Puente Alto, Santiago",
+                photo: "https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&q=80&w=500",
+                ownerName: "Carlos Mendoza",
+                phone: "+56912345678",
+                vetAddress: "Av. Concha y Toro 1234, Puente Alto",
+                criticalAlert: "ALÉRGICO AL MANÍ Y PICADURAS. Necesita medicación si presenta hinchazón en el hocico.",
+                vaccines: "Al día (Oct 2026)",
+                neutered: "Sí",
+                vetName: "Vet. San Francisco",
+                secContact: "María (Mamá) - +56987654321",
+                behavior: "Es muy amigable y juguetón. Responde muy bien a los premios. Si está asustado, ofrecerle agua con calma."
+            },
+            "0002": {
+                name: "Luna",
+                breed: "Quilterita / Mestiza",
+                age: "1.5 años",
+                sex: "Hembra",
+                location: "Providencia, Santiago",
+                photo: "https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?auto=format&fit=crop&q=80&w=500",
+                ownerName: "Fernanda Silva",
+                phone: "+56955554444",
+                vetAddress: "Providencia 890, Santiago",
+                criticalAlert: null, // Sin alertas médicas
+                vaccines: "Al día (Sextuple)",
+                neutered: "Sí",
+                vetName: "Clínica Vet Providencia",
+                secContact: "Gonzalo - +56933332222",
+                behavior: "Un poco tímida con desconocidos al principio, pero jamás agresiva. No correr detrás de ella, llamarla por su nombre suavemente."
+            },
+            "0003": {
+                name: "Max",
+                breed: "Pastor Alemán",
+                age: "9 años",
+                sex: "Macho",
+                location: "La Florida, Santiago",
+                photo: "https://images.unsplash.com/photo-1589941013453-ec89f33b5e95?auto=format&fit=crop&q=80&w=500",
+                ownerName: "Roberto Gómez",
+                phone: "+56977778888",
+                vetAddress: "Vicuña Mackenna 5678, La Florida",
+                criticalAlert: "DISPLASIA DE CADERA. Camina despacio y requiere tomar su remedio antiinflamatorio diario.",
+                vaccines: "Al día",
+                neutered: "No",
+                vetName: "Hospital Vet La Florida",
+                secContact: "Andrea - +56911112222",
+                behavior: "Perrito mayor muy tranquilo. Camina lento. Si se pierde se desorienta fácil debido a su edad."
             }
         };
 
-        function formatearTelefono(num) {
-            if (!num) return '';
-            let limpio = num.toString().replace(/\D/g, '');
-            if (limpio.length === 9 && limpio.startsWith('9')) return '56' + limpio;
-            if (limpio.length === 8) return '569' + limpio;
-            return limpio;
-        }
+        // RENDER FUNCTION
+        function renderPetProfile(petId) {
+            const pet = PET_DATABASE[petId] || PET_DATABASE["0001"];
 
-        function cargarPerfil() {
-            const params = new URLSearchParams(window.location.search);
-            const petId = params.get('id') || '0001';
-            const p = dbMascotas[petId] || dbMascotas["0001"];
+            // Basic details
+            document.getElementById('pet-name').textContent = pet.name;
+            document.getElementById('pet-breed').textContent = pet.breed;
+            document.getElementById('pet-age').textContent = pet.age;
+            document.getElementById('pet-sex').textContent = pet.sex;
+            document.getElementById('pet-location').textContent = pet.location;
+            document.getElementById('pet-photo').src = pet.photo;
+            document.getElementById('owner-name-sub').textContent = `Contacto: ${pet.ownerName}`;
 
-            document.getElementById('pet-id-badge').innerText = 'ID: ' + petId;
-            document.getElementById('pet-name').innerText = p.nombre;
-            document.getElementById('pet-breed').innerText = p.raza;
-            document.getElementById('pet-location-text').innerText = p.comuna;
-            document.getElementById('pet-photo').src = p.foto;
+            // Buttons Actions
+            const cleanPhone = pet.phone.replace(/\s+/g, '');
+            document.getElementById('btn-call').href = `tel:${cleanPhone}`;
             
-            document.getElementById('pet-address-text').innerText = p.texto_casa || 'Ver en Google Maps';
-            document.getElementById('btn-maps-casa').href = p.maps_casa || '#';
+            const waMessage = encodeURIComponent(`Hola ${pet.ownerName}, encontré a tu mascota ${pet.name}. Vía placa NFC.`);
+            document.getElementById('btn-whatsapp').href = `https://wa.me/${cleanPhone.replace('+', '')}?text=${waMessage}`;
+            
+            document.getElementById('btn-maps').href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(pet.vetAddress)}`;
 
-            document.getElementById('pet-vet-text').innerText = p.texto_vet || 'Ver Vet en Google Maps';
-            document.getElementById('btn-maps-vet').href = p.maps_vet || '#';
+            // Medical alert
+            const alertBox = document.getElementById('medical-alert-box');
+            if (pet.criticalAlert) {
+                document.getElementById('medical-alert-text').textContent = pet.criticalAlert;
+                alertBox.classList.remove('hidden');
+            } else {
+                alertBox.classList.add('hidden');
+            }
 
-            document.getElementById('pet-health').innerText = p.alergias;
-            document.getElementById('pet-behavior').innerText = p.comportamiento;
+            // Medical Details
+            document.getElementById('info-vaccines').textContent = pet.vaccines;
+            document.getElementById('info-neutered').textContent = pet.neutered;
+            document.getElementById('info-vet-name').textContent = pet.vetName;
+            document.getElementById('info-sec-contact').textContent = pet.secContact;
+            document.getElementById('info-behavior').textContent = pet.behavior;
 
-            document.getElementById('pet-owner').innerText = p.dueno;
-            document.getElementById('pet-owner2').innerText = p.dueno2 || 'No registrado';
-
-            const tel1 = formatearTelefono(p.telefono);
-            const tel2 = formatearTelefono(p.emergencia);
-
-            document.getElementById('btn-call').href = 'tel:+' + tel1;
-            document.getElementById('btn-wa').href = 'https://wa.me/' + tel1 + '?text=Hola,%20encontr%C3%A9%20a%20tu%20mascota%20' + encodeURIComponent(p.nombre);
-            document.getElementById('btn-emergency').href = 'tel:+' + tel2;
+            // Re-initialize Lucide Icons
+            lucide.createIcons();
         }
 
-        window.onload = cargarPerfil;
+        // URL PARAMETER PARSER (e.g. ?id=0002)
+        function getPetIdFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id') || "0001";
+        }
+
+        // SWITCH PET (DEMO FUNCTION)
+        function switchPet(newId) {
+            // Update URL without page reload for clean feel
+            const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?id=' + newId;
+            window.history.pushState({path: newUrl}, '', newUrl);
+            
+            // Re-render
+            renderPetProfile(newId);
+        }
+
+        // INITIAL LOAD
+        window.addEventListener('DOMContentLoaded', () => {
+            const initialId = getPetIdFromURL();
+            renderPetProfile(initialId);
+        });
     </script>
 </body>
 </html>
