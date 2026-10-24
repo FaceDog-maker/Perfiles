@@ -224,7 +224,7 @@
     <!-- JAVASCRIPT: DYNAMIC DATA ENGINE -->
     <script>
         // MOCK DATABASE (In production, this can be fetched from a single JSON file or Google Sheets)
-        const PET_DATABASE = {
+        let PET_DATABASE = {
             "0001": {
                 name: "Zeus",
                 breed: "Quiltro",
@@ -386,6 +386,8 @@
 
         const datos = convertirCSVaBaseDeDatos(texto);
 
+PET_DATABASE = datos;        
+
 console.log("Datos convertidos:");
 console.log(datos);
 
@@ -393,11 +395,13 @@ console.log(datos);
         console.error("Error leyendo Google Sheets:", error);
     }
 }
-       window.addEventListener('DOMContentLoaded', () => {
-    probarGoogleSheets();
+       window.addEventListener('DOMContentLoaded', async () => {
+
+    await probarGoogleSheets();
 
     const initialId = getPetIdFromURL();
     renderPetProfile(initialId);
+
 });
     </script>
 </body>
