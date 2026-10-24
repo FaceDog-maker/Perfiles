@@ -337,10 +337,26 @@
         }
 
         // INITIAL LOAD
-        window.addEventListener('DOMContentLoaded', () => {
-            const initialId = getPetIdFromURL();
-            renderPetProfile(initialId);
-        });
+        async function probarGoogleSheets() {
+    const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRwRICf7uEEnrlzPXNjG-ukuGNKe9sH-VLC5A5j3fvBJellwRalakD2GLA45ZjeUwTLQ1a3uzIt1eBB/pub?output=csv";
+
+    try {
+        const response = await fetch(CSV_URL);
+        const texto = await response.text();
+
+        console.log("CSV recibido:");
+        console.log(texto);
+
+    } catch (error) {
+        console.error("Error leyendo Google Sheets:", error);
+    }
+}
+       window.addEventListener('DOMContentLoaded', () => {
+    probarGoogleSheets();
+
+    const initialId = getPetIdFromURL();
+    renderPetProfile(initialId);
+});
     </script>
 </body>
 </html>
