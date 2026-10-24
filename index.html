@@ -278,6 +278,46 @@
             }
         };
 
+        function convertirCSVaBaseDeDatos(csv) {
+    const lineas = csv.trim().split("\n");
+
+    const encabezados = lineas[0].split(",");
+
+    const database = {};
+
+    for (let i = 1; i < lineas.length; i++) {
+        const valores = lineas[i].split(",");
+
+        const fila = {};
+
+        encabezados.forEach((campo, index) => {
+            fila[campo.trim()] = valores[index]
+                ? valores[index].trim()
+                : "";
+        });
+
+        database[fila.id] = {
+            name: fila.nombre,
+            breed: fila.raza,
+            age: fila.edad + " años",
+            sex: fila.sexo,
+            location: fila.comuna,
+            photo: fila.foto,
+            ownerName: fila.dueno_principal,
+            phone: fila.telefono_principal,
+            vetAddress: fila.direccion,
+            criticalAlert: fila.alerta_medica,
+            vaccines: fila.vacunas,
+            neutered: fila.esterilizado,
+            vetName: fila.veterinaria,
+            secContact: fila.contacto_secundario,
+            behavior: fila.comportamiento
+        };
+    }
+
+    return database;
+}
+
         // RENDER FUNCTION
         function renderPetProfile(petId) {
             const pet = PET_DATABASE[petId] || PET_DATABASE["0001"];
@@ -344,8 +384,10 @@
         const response = await fetch(CSV_URL);
         const texto = await response.text();
 
-        console.log("CSV recibido:");
-        console.log(texto);
+        const datos = convertirCSVaBaseDeDatos(texto);
+
+console.log("Datos convertidos:");
+console.log(datos);
 
     } catch (error) {
         console.error("Error leyendo Google Sheets:", error);
